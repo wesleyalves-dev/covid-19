@@ -6,6 +6,8 @@ import GlobalData from './components/GlobalData'
 import ListCountries from './components/ListCountries'
 import ButtonInfo from './components/ButtonInfo'
 
+import './services/count'
+
 export default function App() {
   return (
     <Container>
