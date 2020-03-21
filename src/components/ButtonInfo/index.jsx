@@ -40,7 +40,7 @@ export default function ButtonInfo() {
             fonte oficial de informação
           </dd>
           <dt>Extra</dt>
-          <dd>Dados atualizados uma vez por dia</dd>
+          <dd>Dados atualizados diariamente</dd>
         </dl>
       </Popup>
       <button type="button" onClick={handlePopup}>
