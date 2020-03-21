@@ -10,6 +10,7 @@ import Chart from './Chart'
 
 export default function GlobalData() {
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -19,8 +20,14 @@ export default function GlobalData() {
         setData(response.data)
         setLoading(false)
       })
-      .catch(() => {})
+      .catch(e =>
+        setError(
+          `Ocorreu um erro, por favor atualize a página. Detalhe: ${e.message}`
+        )
+      )
   }, [])
+
+  if (error) return error
 
   return (
     <Card>
