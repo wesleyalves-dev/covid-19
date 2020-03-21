@@ -10,8 +10,9 @@ export default function App() {
   return (
     <Container>
       <GlobalStyle />
-      <GlobalData />
-      <br />
+      <header>
+        <GlobalData />
+      </header>
       <ListCountries />
       <ButtonInfo />
     </Container>

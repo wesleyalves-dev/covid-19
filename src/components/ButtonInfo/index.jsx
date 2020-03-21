@@ -34,13 +34,13 @@ export default function ButtonInfo() {
               GitHub repository
             </a>
           </dd>
+          <dt>Extra</dt>
+          <dd>Dados atualizados diariamente</dd>
           <dt>Importante!</dt>
           <dd>
             Os dados apresentados nesta página não devem ser encarados como
             fonte oficial de informação
           </dd>
-          <dt>Extra</dt>
-          <dd>Dados atualizados diariamente</dd>
         </dl>
       </Popup>
       <button type="button" onClick={handlePopup}>

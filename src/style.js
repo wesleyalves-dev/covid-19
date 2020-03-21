@@ -22,4 +22,8 @@ export const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding-top: 10px;
+
+  header {
+    margin-bottom: 20px;
+  }
 `

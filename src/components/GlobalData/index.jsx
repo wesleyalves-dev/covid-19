@@ -27,27 +27,23 @@ export default function GlobalData() {
       )
   }, [])
 
+  if (loading) return 'Carregando dados globais...'
+
   if (error) return error
 
   return (
     <Card>
-      {loading ? (
-        'Carregando...'
-      ) : (
-        <>
-          <h2>Mundo</h2>
-          <ul>
-            <li>Casos: {formatNum(data.cases)}</li>
-            <li>Mortes: {formatNum(data.deaths)}</li>
-            <li>Recuperações: {formatNum(data.recovered)}</li>
-          </ul>
-          <Chart
-            cases={data.cases}
-            deaths={data.deaths}
-            recovered={data.recovered}
-          />
-        </>
-      )}
+      <h2>Mundo</h2>
+      <ul>
+        <li>Casos: {formatNum(data.cases)}</li>
+        <li>Mortes: {formatNum(data.deaths)}</li>
+        <li>Recuperações: {formatNum(data.recovered)}</li>
+      </ul>
+      <Chart
+        cases={data.cases}
+        deaths={data.deaths}
+        recovered={data.recovered}
+      />
     </Card>
   )
 }

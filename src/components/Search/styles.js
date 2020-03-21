@@ -5,7 +5,7 @@ export const ContainerInput = styled.div`
   margin-bottom: 20px;
 
   input {
-    padding: 15px;
+    padding: 15px 15px 15px 45px;
     border: none;
     border-radius: 5px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
@@ -14,11 +14,9 @@ export const ContainerInput = styled.div`
   }
 
   i {
-    position: relative;
-    float: right;
+    float: left;
     text-align: center;
-    right: 0;
-    margin-right: 10px;
+    margin-left: 10px;
     margin-top: -37px;
     opacity: 0.3;
     font-size: 1.8em;

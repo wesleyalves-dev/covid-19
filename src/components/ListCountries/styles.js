@@ -24,9 +24,12 @@ export const ChartContainer = styled.div`
   margin: 5px 0;
 `
 
-export const Bar = styled.div`
+export const Bar = styled.div.attrs(props => ({
+  style: {
+    background: props.color,
+    width: `${props.value}%`
+  }
+}))`
   display: inline-block;
   height: 8px;
-  background: ${props => props.color};
-  width: ${props => props.value}%;
 `

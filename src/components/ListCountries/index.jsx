@@ -10,7 +10,7 @@ import Search from '../Search'
 import Chart from './Chart'
 
 export default function ListCountries() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState('')
@@ -29,7 +29,7 @@ export default function ListCountries() {
       )
   }, [])
 
-  if (loading) return 'Carregando...'
+  if (loading) return 'Carregando dados de países...'
 
   if (error) return error
 
