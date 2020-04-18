@@ -21,7 +21,8 @@ export const Card = styled.div`
 `
 
 export const ChartContainer = styled.div`
-  margin: 5px 0;
+  height: 8px;
+  margin: 0 0 7px 0;
 `
 
 export const Bar = styled.div.attrs(props => ({

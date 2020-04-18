@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import api from '../../services/api'
 
 import formatNum from '../../lib/formatNum'
+import formatPercent from '../../lib/formatPercent'
 
 import { Card } from './styles'
 
@@ -16,11 +17,28 @@ export default function ListCountries() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
+    function markCountries(country) {
+      const continents = [
+        'North America',
+        'Europe',
+        'Asia',
+        'South America',
+        'Oceania',
+        'Africa',
+        'World'
+      ]
+
+      const newList = country
+      newList.isCountry = !continents.includes(country.country)
+
+      return newList
+    }
+
     api
       .get('/countries')
       .then(response => {
         setLoading(false)
-        setCountries(response.data)
+        setCountries(response.data.map(markCountries))
       })
       .catch(e =>
         setError(
@@ -29,7 +47,17 @@ export default function ListCountries() {
       )
   }, [])
 
-  if (loading) return 'Carregando dados de países...'
+  function filterBySearch(country) {
+    return search
+      ? country.country.toLowerCase().startsWith(search.toLowerCase())
+      : true
+  }
+
+  function filterUnnamedRegistry({ country }) {
+    return !!country && country !== 'Total:'
+  }
+
+  if (loading) return 'Carregando dados...'
 
   if (error) return error
 
@@ -38,15 +66,12 @@ export default function ListCountries() {
       <Search
         type="search"
         value={search}
-        placeholder="Pesquisar país (inglês)"
+        placeholder="Pesquisar (inglês)"
         onChange={evt => setSearch(evt.target.value)}
       />
       {countries
-        .filter(country =>
-          search
-            ? country.country.toLowerCase().startsWith(search.toLowerCase())
-            : true
-        )
+        .filter(filterBySearch)
+        .filter(filterUnnamedRegistry)
         .map(country => (
           <Card key={country.country}>
             <h2>{country.country}</h2>
@@ -54,11 +79,30 @@ export default function ListCountries() {
               <li>Casos: {formatNum(country.cases)}</li>
               <li>Mortes: {formatNum(country.deaths)}</li>
               <li>Recuperados: {formatNum(country.recovered)}</li>
+              {country.isCountry && (
+                <>
+                  <li>Teste feitos: {formatNum(country.totalTests)}</li>
+                  <li>
+                    Tx. mortalidade:{' '}
+                    {formatPercent((country.deaths * 100) / country.cases)}
+                  </li>
+                </>
+              )}
             </ul>
             <ul>
               <li>Casos hoje: {formatNum(country.todayCases)}</li>
               <li>Mortes hoje: {formatNum(country.todayDeaths)}</li>
               <li>Casos/Milhão: {formatNum(country.casesPerOneMillion)}</li>
+              {country.isCountry && (
+                <>
+                  <li>
+                    Testes/Milhão: {formatNum(country.testsPerOneMillion)}
+                  </li>
+                  <li>
+                    Mortes/Milhão: {formatNum(country.deathsPerOneMillion)}
+                  </li>
+                </>
+              )}
             </ul>
             <Chart
               cases={country.cases}
